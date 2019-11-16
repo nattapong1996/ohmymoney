@@ -16,9 +16,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let incomes of income">
+      <tr class="tr-show" *ngFor="let incomes of incomes">
         <td>{{incomes.id}}</td>
-        <td>{{incomes.date | date:'yyyy-MM-dd'}}</td>
+        <td>{{incomes.date | date:'dd/MM/yyyy'}}</td>
         <td>{{incomes.incomeNameGroupID}}</td>
         <td>{{incomes.amount | number}}</td>
         <td></td>
@@ -27,13 +27,32 @@
   </table>
 </div>
 <ng-template #template>
-  <div class="modal-header p-2">
-    <h4 class="modal-title pull-left m-0">Modal</h4>
-    <button type="button" class="close pull-right p-2 m-0" aria-label="Close" (click)="modalRef.hide()">
-      <span style="font-size: 24px;" aria-hidden="true">&times;</span>
+  <div class="modal-header p-1 bg-light">
+    <h4 class="modal-title p-2 pull-left m-0">Modal</h4>
+    <button type="button" class="close pull-right p-2 m-0" style="height: 30px;width: 30px;" aria-label="Close"
+      (click)="modalRef.hide()">
+      <span>&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    This is a modal.
+    <div class="row ">
+      <div class="col-12">
+        <form [formGroup]="incomeForm">
+          <div class="form-group">
+            <input type="text" formControlName="date" class="form-control" placeholder="วันที่" bsDatepicker>
+          </div>
+          <div class="form-group">
+            <select class="form-control" formControlName="incomeGroupID">
+              <option>กรุณาเลือกประเภทเงินเดือน</option>
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input placeholder="จำนวนเงิน" class="form-control" formControlName="amount">
+          </div>
+          <button type="submit" class="btn btn-outline-success btn-block" (click)="submit()">ตกลง</button>
+        </form>
+      </div>
+    </div>
   </div>
 </ng-template>
