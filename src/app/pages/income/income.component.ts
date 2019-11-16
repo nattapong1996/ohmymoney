@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Income } from 'src/app/models/income';
 import { HttpClient } from '@angular/common/http';
+import { IncomeService } from 'src/app/services/incomes/income.service';
 
 
 @Component({
@@ -11,17 +12,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class IncomeComponent implements OnInit {
   modalRef: BsModalRef;
-  income: Income[];
+  incomes: Income[];
   constructor(
     private modalService: BsModalService,
-    private http: HttpClient
+    // private http: HttpClient,
+    private incame: IncomeService
   ) { }
 
   ngOnInit() {
-    this.http.get('http://103.74.254.157:9003/income/id/1')
-      .subscribe((incomes: Income[]) => {
-        this.income = incomes;
-      });
+    this.getIncomeUserId();
+  }
+
+  getIncomeUserId() {
+    this.incame.getIncomeByUserId().subscribe(res => {
+      console.log(res);
+    });
   }
 
   openModal(template: TemplateRef<any>) {
