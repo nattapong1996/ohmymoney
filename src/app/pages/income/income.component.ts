@@ -62,9 +62,7 @@ export class IncomeComponent implements OnInit {
     };
     this.incameService.saveIncome(data).subscribe(_ => {
       this.getIncomeByUserId();
-      setTimeout(() => {
-        this.modalRef.hide();
-      }, 1000);
+      // this.modalRef.hide();
     });
   }
 

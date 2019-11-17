@@ -30,8 +30,9 @@ export class IncomeService {
     return this.http.post(`${this.SERVER_URL}/income`, income);
   }
 
-  editIncomeService() {
-
+  updateIncome(id: number, data: IncomeRequest) {
+    data.userId = 23;
+    return this.http.put(`${this.SERVER_URL}/income/id/${id}`, data);
   }
 
   deleteIncomeService() {

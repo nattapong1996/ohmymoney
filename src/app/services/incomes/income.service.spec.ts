@@ -3,6 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { IncomeService } from './income.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { IncomeRequest } from 'src/app/models/income-request';
+import { concat } from 'rxjs';
+import { isRegExp } from 'util';
 
 describe('IncomeService', () => {
   let service: IncomeService;
@@ -64,5 +66,33 @@ describe('IncomeService', () => {
     const req = httpTestingController.expectOne(`${service.SERVER_URL}/income`);
     expect(req.request.body).toEqual(expected);
   });
+  it('should call method PUT with url or update income api', () => {
+    const id = 1;
+    const dataRequest = {
+      amount: 5000,
+      date: '12/31/2019',
+      incomeGroupId: 3
+    } as IncomeRequest;
+    service.updateIncome(id, dataRequest).subscribe();
+    const req = httpTestingController.expectOne(`${service.SERVER_URL}/income/id/${id}`);
+    expect(req.request.method).toEqual('PUT');
+  });
+  it('sould set user id when call method update income api', () => {
+    const id = 1;
+    const dataRequest = {
+      amount: 5000,
+      date: '12/15/2019',
+      incomeGroupId: 3
+    } as IncomeRequest;
 
+    const expected = {
+      userId: 23,
+      amount: 5000,
+      date: '12/15/2019',
+      incomeGroupId: 3
+    } as IncomeRequest;
+    service.updateIncome(id, dataRequest).subscribe();
+    const req = httpTestingController.expectOne(`${service.SERVER_URL}/income/id/${id}`);
+    expect(req.request.body).toEqual(expected);
+  });
 });
