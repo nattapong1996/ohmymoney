@@ -44,7 +44,7 @@ describe('IncomeComponent', () => {
       expected = [
         {
           id: 1,
-          incomeGroupID: 1,
+          incomeGroupId: 1,
           incomeGroupName: 'งานประจำ',
           amount: 100000,
           date: '1/31/2019'
@@ -121,5 +121,30 @@ describe('IncomeComponent', () => {
 
     component.onSubmit();
     expect(incomeService.getIncomeByUserId).toHaveBeenCalled();
+  });
+
+  it('should call UpdateIncome service when click edit', () => {
+    spyOn(incomeService, 'updateIncome');
+    component.incomeForm.get('date').setValue('2019-11-15T17:58:17.318Z');
+    component.incomeForm.get('incomeGroupId').setValue('1');
+    component.incomeForm.get('amount').setValue('100000');
+    spyOn(component, 'getDateISO').and.returnValue('2019-11-15T17:58:17.318Z');
+
+    const input = {
+      id: 1,
+      incomeGroupId: 1,
+      incomeGroupName: 'งานประจำ',
+      amount: 100000,
+      date: '2019-11-15T17:58:17.318Z',
+    } as Income;
+
+    const dateUpdate = {
+      incomeGroupId: 3,
+      amount: 100000,
+      date: '2019-11-15T17:58:17.318Z',
+    } as IncomeRequest;
+
+    component.edit(input);
+    expect(incomeService.updateIncome).toHaveBeenCalledWith(input.id, dateUpdate);
   });
 });

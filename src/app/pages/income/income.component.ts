@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { IncomeService } from 'src/app/services/incomes/income.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { IncomeGroup } from 'src/app/models/income-group';
+import { IncomeRequest } from 'src/app/models/income-request';
 
 
 @Component({
@@ -49,11 +50,7 @@ export class IncomeComponent implements OnInit {
       this.incomes = res;
     });
   }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
+  
   onSubmit() {
     const data = {
       date: this.getDateISO(this.incomeForm.get('date').value),
@@ -70,7 +67,17 @@ export class IncomeComponent implements OnInit {
     return new Date(date).toISOString();
   }
 
-  editIncome() {
+  openEdit(template: TemplateRef<any>, incomes) {
+  }
+  edit(income: Income) {
+    const data = {
+      date: this.getDateISO(this.incomeForm.get('date').value),
+      incomeGroupId: Number(this.incomeForm.get('incomeGroupId').value),
+      amount: Number(this.incomeForm.get('amount').value)
+    } as IncomeRequest;
+    this.incameService.updateIncome(income.id, data);
+  }
+  updateIncome() {
 
   }
   deleteIncome() {
