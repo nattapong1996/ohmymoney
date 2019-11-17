@@ -1,13 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-:host {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 14px;
-  color: #333;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+// /* You can add global styles to this file, and also import other style files */
+// :host {
+//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+//     "Segoe UI Emoji", "Segoe UI Symbol";
+//   font-size: 14px;
+//   color: #333;
+//   box-sizing: border-box;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
 
 h1,
 h2,
@@ -26,22 +26,22 @@ p {
   flex: 1;
 }
 
-tr {
-  width: 100%;
-  display: inline-table;
-  table-layout: fixed;
-}
+// tr {
+//   width: 100%;
+//   display: inline-table;
+//   table-layout: fixed;
+// }
 
-table {
-  width: 100%;
-  height: 300px;
-  // display: -moz-groupbox; // Firefox Bad Effect
+// table {
+//   width: 100%;
+//   height: 300px;
+//   // display: -moz-groupbox; // Firefox Bad Effect
 
-  td {
-    // white-space: nowrap;
-    width: 100%;
-  }
-}
+//   td {
+//     // white-space: nowrap;
+//     width: 100%;
+//   }
+// }
 .tr-show {
   background: #fff;
   padding: 6px 8px;
@@ -52,12 +52,12 @@ table {
 .tr-show:hover {
   background: #eee;
 }
-// tbody {
-//   overflow-y: scroll;
-//   height: 200px;
-//   width: 100%;
-//   position: absolute;
-// }
+// // tbody {
+// //   overflow-y: scroll;
+// //   height: 200px;
+// //   width: 100%;
+// //   position: absolute;
+// // }
 
 .toolbar {
   height: 60px;

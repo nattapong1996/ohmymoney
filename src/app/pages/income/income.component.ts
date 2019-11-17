@@ -32,6 +32,7 @@ export class IncomeComponent implements OnInit {
       incomeGroupID: '',
       amount: ''
     });
+    console.log(this.incomeForm.controls.date.value);
   }
 
   getIncomeUserId() {
