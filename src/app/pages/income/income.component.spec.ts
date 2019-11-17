@@ -43,7 +43,7 @@ describe('IncomeComponent', () => {
         {
           id: 1,
           incomeGroupID: 1,
-          incomeNameGroupID: 'งานประจำ',
+          incomeGroupName: 'งานประจำ',
           amount: 100000,
           date: '1/31/2019'
         }
