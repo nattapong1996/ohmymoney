@@ -24,7 +24,7 @@ describe('IncomeService', () => {
     service.getIncomeByUserId().subscribe();
 
     const req = httpTestingController.expectOne(
-      `${service.SERVER_URL}/income/id/${service.userId}`
+      `${service.SERVER_URL}/income/id/${service.USER_ID}`
     );
     expect(req.request.method).toBe('GET');
   });
@@ -37,7 +37,7 @@ describe('IncomeService', () => {
 
   it('should call method POST with url of save income api', () => {
     const dataRequest = {
-      amount: 5000,
+      amount: 50000,
       date: '12/31/2019',
       incomeGroupId: 3
     } as IncomeRequest;

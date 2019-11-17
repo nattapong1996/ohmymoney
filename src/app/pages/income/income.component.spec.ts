@@ -97,7 +97,6 @@ describe('IncomeComponent', () => {
     component.incomeForm.get('incomeGroupId').setValue('3');
     component.incomeForm.get('amount').setValue('50000');
 
-
     spyOn(incomeService, 'saveIncome').and.returnValue(of());
     spyOn(component, 'getDateISO').and.returnValue('2019-11-15T17:58:17.318Z');
 
@@ -108,5 +107,19 @@ describe('IncomeComponent', () => {
     } as IncomeRequest;
     component.onSubmit();
     expect(incomeService.saveIncome).toHaveBeenCalledWith(expected);
+  });
+
+  it('shold call getincome by userID when called save income success', () => {
+    component.incomeForm.get('date').setValue('11/15/2019');
+    component.incomeForm.get('incomeGroupId').setValue('3');
+    component.incomeForm.get('amount').setValue('50000');
+
+    spyOn(incomeService, 'saveIncome').and.returnValue(of([]));
+    spyOn(component, 'getDateISO').and.returnValue('2019-11-15T17:58:17.318Z');
+
+    spyOn(incomeService, 'getIncomeByUserId').and.returnValue(of([]));
+
+    component.onSubmit();
+    expect(incomeService.getIncomeByUserId).toHaveBeenCalled();
   });
 });

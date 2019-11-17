@@ -7,7 +7,7 @@
   </div>
   <table class="table">
     <thead>
-      <tr>
+      <tr class="text-center">
         <th scope="col">ลำดับ</th>
         <th scope="col">วันที่</th>
         <th scope="col">ประเภท</th>
@@ -18,7 +18,7 @@
     <tbody>
       <tr class="tr-show" *ngFor="let incomes of incomes">
         <td>{{incomes.id}}</td>
-        <td>{{incomes.date | date:'dd/MM/yyyy'}}</td>
+        <td>{{incomes.date | date:'MM/dd/yyyy'}}</td>
         <td>{{incomes.incomeGroupName}}</td>
         <td>{{incomes.amount | number}}</td>
         <td class="p-1" style="width: 130px;">

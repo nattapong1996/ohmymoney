@@ -26,7 +26,7 @@ export class IncomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getIncomeUserId();
+    this.getIncomeByUserId();
     this.createForm();
     this.getIncomeGroup();
   }
@@ -44,7 +44,7 @@ export class IncomeComponent implements OnInit {
     });
   }
 
-  getIncomeUserId() {
+  getIncomeByUserId() {
     this.incameService.getIncomeByUserId().subscribe(res => {
       this.incomes = res;
     });
@@ -60,11 +60,22 @@ export class IncomeComponent implements OnInit {
       incomeGroupId: Number(this.incomeForm.get('incomeGroupId').value),
       amount: Number(this.incomeForm.get('amount').value)
     };
-    this.incameService.saveIncome(data);
+    this.incameService.saveIncome(data).subscribe(_ => {
+      this.getIncomeByUserId();
+      setTimeout(() => {
+        this.modalRef.hide();
+      }, 1000);
+    });
   }
 
   getDateISO(date: string): string {
     return new Date(date).toISOString();
   }
 
+  editIncome() {
+
+  }
+  deleteIncome() {
+
+  }
 }
