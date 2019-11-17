@@ -33,7 +33,7 @@ export class IncomeComponent implements OnInit {
   createForm() {
     this.incomeForm = this.fb.group({
       date: '',
-      incomeGroupID: '',
+      incomeGroupId: '',
       amount: ''
     });
   }
@@ -54,9 +54,17 @@ export class IncomeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  submit() {
-console.log(this.incomeForm.value);
+  onSubmit() {
+    const data = {
+      date: this.getDateISO(this.incomeForm.get('date').value),
+      incomeGroupId: Number(this.incomeForm.get('incomeGroupId').value),
+      amount: Number(this.incomeForm.get('amount').value)
+    };
+    this.incameService.saveIncome(data);
+  }
 
+  getDateISO(date: string): string {
+    return new Date(date).toISOString();
   }
 
 }

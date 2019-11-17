@@ -8,6 +8,7 @@ import { Income } from 'src/app/models/income';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IncomeGroup } from 'src/app/models/income-group';
+import { IncomeRequest } from 'src/app/models/income-request';
 
 describe('IncomeComponent', () => {
   let component: IncomeComponent;
@@ -64,7 +65,7 @@ describe('IncomeComponent', () => {
 
     it('should set empty income gruop id of form', () => {
       component.ngOnInit();
-      expect(component.incomeForm.controls.incomeGroupID.value).toBe('');
+      expect(component.incomeForm.controls.incomeGroupId.value).toBe('');
     });
 
     it('should set empty in amount of form', () => {
@@ -89,5 +90,23 @@ describe('IncomeComponent', () => {
     spyOn(incomeService, 'getIncomeGroup').and.returnValue(of(expected));
     component.ngOnInit();
     expect(component.incomegroup).toBe(expected);
+  });
+
+  it('should call method save income when click submit', () => {
+    component.incomeForm.get('date').setValue('11/15/2019');
+    component.incomeForm.get('incomeGroupId').setValue('3');
+    component.incomeForm.get('amount').setValue('50000');
+
+
+    spyOn(incomeService, 'saveIncome').and.returnValue(of());
+    spyOn(component, 'getDateISO').and.returnValue('2019-11-15T17:58:17.318Z');
+
+    const expected = {
+      amount: 50000,
+      date: '2019-11-15T17:58:17.318Z',
+      incomeGroupId: 3
+    } as IncomeRequest;
+    component.onSubmit();
+    expect(incomeService.saveIncome).toHaveBeenCalledWith(expected);
   });
 });
