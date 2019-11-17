@@ -4,6 +4,7 @@ import { Income } from 'src/app/models/income';
 import { HttpClient } from '@angular/common/http';
 import { IncomeService } from 'src/app/services/incomes/income.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { IncomeGroup } from 'src/app/models/income-group';
 
 
 @Component({
@@ -15,16 +16,19 @@ export class IncomeComponent implements OnInit {
   modalRef: BsModalRef;
   incomes: Income[];
   incomeForm: FormGroup;
+  incomegroup: IncomeGroup[];
   constructor(
     private modalService: BsModalService,
     // private http: HttpClient,
-    private incame: IncomeService,
+    private incameService: IncomeService,
     private fb: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.getIncomeUserId();
     this.createForm();
+    this.getIncomeGroup();
   }
   createForm() {
     this.incomeForm = this.fb.group({
@@ -32,11 +36,16 @@ export class IncomeComponent implements OnInit {
       incomeGroupID: '',
       amount: ''
     });
-    console.log(this.incomeForm.controls.date.value);
+  }
+
+  getIncomeGroup() {
+    this.incameService.getIncomeGroup().subscribe(res => {
+      this.incomegroup = res;
+    });
   }
 
   getIncomeUserId() {
-    this.incame.getIncomeByUserId().subscribe(res => {
+    this.incameService.getIncomeByUserId().subscribe(res => {
       this.incomes = res;
     });
   }
@@ -44,7 +53,9 @@ export class IncomeComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
   submit() {
+console.log(this.incomeForm.value);
 
   }
 
